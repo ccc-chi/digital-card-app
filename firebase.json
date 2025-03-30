@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "site": "digital-card-app-4022e-3f0ab",
+    "public": "dist",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
