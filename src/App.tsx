@@ -1,7 +1,7 @@
 function App() {
   return (
     <>
-      <h1>デジタル名刺アプリ</h1>
+      <h1 data-testid="appTitle">デジタル名刺アプリ</h1>
     </>
   );
 }
