@@ -25,7 +25,11 @@ export const getUserById = async ( id:string ): Promise<Users | null> => {
 }
 
 export const getSkillByUserId = async ( id:string ): Promise<User_skill | null> => {
-  const { data, error } = await supabase.from('users').select('*').eq('user_id', id).single();
+  const { data, error } = await supabase
+    .from("user_skill")
+    .select("*")
+    .eq("user_id", id)
+    .single();
   if ( error ) {
     console.error('Error:', error.message);
   }
