@@ -1,15 +1,21 @@
 import { FC, memo, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { getSkillByUserId, getUserById } from "../../utils/supabaseFunction";
+import {
+  getSkillByUserId,
+  getSkillTable,
+  getUserById,
+} from "../../utils/supabaseFunction";
 import { Users } from "../../domain/users";
 import { User_skill } from "../../domain/user_skill";
+import { Skills } from "../../domain/skills";
 
 export const User: FC = memo(() => {
   const { id } = useParams<{ id: string }>();
-  const [Loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [user, setUser] = useState<Users | null>(null);
   const [skill, setSkill] = useState<User_skill | null>(null);
+  const [skillList, setSkillList] = useState<Skills[] | null>(null);
 
   //-- データをフェッチ
   useEffect(() => {
@@ -18,21 +24,28 @@ export const User: FC = memo(() => {
       return;
     }
     const fetchData = async () => {
-      const [userData, skillData] = await Promise.all([
+      const [userData, skillData, skillTable] = await Promise.all([
         getUserById(id),
         getSkillByUserId(id),
+        getSkillTable(),
       ]);
       setUser(userData);
       setSkill(skillData);
+      setSkillList(skillTable);
       setLoading(false);
+      console.log("userData", userData);
+      console.log("skillTable", skillTable);
+      console.log("skillData", skillData);
     };
     fetchData();
   }, [id]);
+  const matchSkillName = skillList?.find((item) => item.id === skill?.skill_id);
+  console.log("matchSkillName", matchSkillName);
 
   return (
     <>
       <h1>ID：{id}</h1>
-      {Loading ? (
+      {loading ? (
         <p>Loading...</p>
       ) : (
         <div>
@@ -54,7 +67,7 @@ export const User: FC = memo(() => {
           <p>スキルが見つかりませんでした</p>
         ) : (
           <div key={skill.id}>
-            <p>{skill.skill_id}</p>
+            <p>{matchSkillName?.name}</p>
           </div>
         )}
       </div>

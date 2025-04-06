@@ -1,8 +1,8 @@
 export class User_skill {
   constructor(
-    public id: string,
+    public id: number,
     public user_id: string,
-    public skill_id: string,
+    public skill_id: number,
     public created_at: Date
   ) {}
 }
