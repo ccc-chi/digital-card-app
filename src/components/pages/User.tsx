@@ -1,4 +1,4 @@
-import { FC, memo, useEffect, useState } from "react";
+import { FC, memo, useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import {
@@ -39,34 +39,34 @@ export const User: FC = memo(() => {
     };
     fetchData();
   }, [id]);
-  const matchSkillName = skillList?.find((item) => item.id === skill?.skill_id);
-  console.log("matchSkillName", matchSkillName);
+  const matchSkillName = useMemo(() => {
+    return skillList?.find((item) => item.id === skill?.skill_id);
+  }, [skillList, skill]);
 
+  if (loading) {
+    return <p>Loading...</p>;
+  }
   return (
     <>
       <h1>ID：{id}</h1>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <div>
-          {user === null ? (
-            <p>ユーザーが見つかりませんでした</p>
-          ) : (
-            <div key={user.user_id}>
-              <p>{user.name}</p>
-              <p>{user.description}</p>
-              <p>{user.github_id}</p>
-              <p>{user.X_id}</p>
-              <p>{user.qiita_id}</p>
-            </div>
-          )}
-        </div>
-      )}
+      <div>
+        {user === null ? (
+          <p>ユーザーが見つかりませんでした</p>
+        ) : (
+          <div key={user.user_id}>
+            <p>{user.name}</p>
+            <p>{user.description}</p>
+            <p>{user.github_id}</p>
+            <p>{user.X_id}</p>
+            <p>{user.qiita_id}</p>
+          </div>
+        )}
+      </div>
       <div>
         {skill === null ? (
           <p>スキルが見つかりませんでした</p>
         ) : (
-          <div key={skill.id}>
+          <div>
             <p>{matchSkillName?.name}</p>
           </div>
         )}
