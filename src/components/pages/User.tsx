@@ -24,21 +24,28 @@ export const User: FC = memo(() => {
       return;
     }
     const fetchData = async () => {
-      const [userData, skillData, skillTable] = await Promise.all([
-        getUserById(id),
-        getSkillByUserId(id),
-        getSkillTable(),
-      ]);
-      setUser(userData);
-      setSkill(skillData);
-      setSkillList(skillTable);
-      setLoading(false);
-      console.log("userData", userData);
-      console.log("skillTable", skillTable);
-      console.log("skillData", skillData);
+      try {
+        const [userData, skillData, skillTable] = await Promise.all([
+          getUserById(id),
+          getSkillByUserId(id),
+          getSkillTable(),
+        ]);
+        setUser(userData);
+        setSkill(skillData);
+        setSkillList(skillTable);
+        console.log("userData", userData);
+        console.log("skillTable", skillTable);
+        console.log("skillData", skillData);
+      } catch (error) {
+        console.log("fetchData-error", error);
+      } finally {
+        setLoading(false);
+      }
     };
     fetchData();
   }, [id]);
+
+  //-- スキルを検索
   const matchSkillName = useMemo(() => {
     return skillList?.find((item) => item.id === skill?.skill_id);
   }, [skillList, skill]);
