@@ -1,8 +1,6 @@
 import { supabase } from "./supabase";
 import { Users } from "../domain/users";
-import { User_skill } from "../domain/user_skill";
 import { Skills } from "../domain/skills";
-import { Projects } from "../domain/projects";
 
 export const getAllUsers = async (): Promise<Users[]> => {
   const { data, error } = await supabase.from("users").select("*");
@@ -27,7 +25,7 @@ export const getUserById = async (id: string): Promise<Users | null> => {
   if (!data) {
     return null;
   }
-  return data;
+  return Users.newUsers(data);
 };
 
 export const getSkillTable = async (): Promise<Skills[] | null> => {

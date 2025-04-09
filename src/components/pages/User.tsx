@@ -27,7 +27,6 @@ export const User: FC = memo(() => {
         setSkillList(skillTable);
         console.log("userData", userData);
         // console.log("skillTable", skillTable);
-        // console.log("skillData", skillData);
       } catch (error) {
         console.log("fetchData-error", error);
       } finally {
@@ -55,9 +54,27 @@ export const User: FC = memo(() => {
           <div key={user.user_id}>
             <p>{user.name}</p>
             <p>{user.description}</p>
-            <p>{user.github_id}</p>
-            <p>{user.X_id}</p>
-            <p>{user.qiita_id}</p>
+            <p>
+              {user.github_id && (
+                <a href={user.github_url} target="_blank">
+                  GIT HUB：{user.github_id}
+                </a>
+              )}
+            </p>
+            <p>
+              {user.X_id && (
+                <a href={user.X_id} target="_blank">
+                  X：{user.X_id}
+                </a>
+              )}
+            </p>
+            <p>
+              {user.qiita_id && (
+                <a href={user.qiita_url} target="_blank">
+                  Qiita：{user.qiita_id}
+                </a>
+              )}
+            </p>
           </div>
         )}
       </div>
