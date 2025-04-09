@@ -1,20 +1,14 @@
 import { FC, memo, useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import {
-  getSkillByUserId,
-  getSkillTable,
-  getUserById,
-} from "../../utils/supabaseFunction";
+import { getSkillTable, getUserById } from "../../utils/supabaseFunction";
 import { Users } from "../../domain/users";
-import { User_skill } from "../../domain/user_skill";
 import { Skills } from "../../domain/skills";
 
 export const User: FC = memo(() => {
   const { id } = useParams<{ id: string }>();
   const [loading, setLoading] = useState<boolean>(true);
   const [user, setUser] = useState<Users | null>(null);
-  const [skill, setSkill] = useState<User_skill | null>(null);
   const [skillList, setSkillList] = useState<Skills[] | null>(null);
 
   //-- データをフェッチ
@@ -25,17 +19,15 @@ export const User: FC = memo(() => {
     }
     const fetchData = async () => {
       try {
-        const [userData, skillData, skillTable] = await Promise.all([
+        const [userData, skillTable] = await Promise.all([
           getUserById(id),
-          getSkillByUserId(id),
           getSkillTable(),
         ]);
         setUser(userData);
-        setSkill(skillData);
         setSkillList(skillTable);
         console.log("userData", userData);
-        console.log("skillTable", skillTable);
-        console.log("skillData", skillData);
+        // console.log("skillTable", skillTable);
+        // console.log("skillData", skillData);
       } catch (error) {
         console.log("fetchData-error", error);
       } finally {
@@ -47,8 +39,8 @@ export const User: FC = memo(() => {
 
   //-- スキルを検索
   const matchSkillName = useMemo(() => {
-    return skillList?.find((item) => item.id === skill?.skill_id);
-  }, [skillList, skill]);
+    return skillList?.find((item) => item.id === user?.user_skill[0]?.skill_id);
+  }, [skillList, user]);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -70,7 +62,7 @@ export const User: FC = memo(() => {
         )}
       </div>
       <div>
-        {skill === null ? (
+        {matchSkillName === undefined ? (
           <p>スキルが見つかりませんでした</p>
         ) : (
           <div>
