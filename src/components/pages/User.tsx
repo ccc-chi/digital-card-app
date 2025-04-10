@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { getSkillTable, getUserById } from "../../utils/supabaseFunction";
 import { Users } from "../../domain/users";
 import { Skills } from "../../domain/skills";
+import { UserSkill } from "../organisms/user/UserSkill";
 
 export const User: FC = memo(() => {
   const { id } = useParams<{ id: string }>();
@@ -40,6 +41,7 @@ export const User: FC = memo(() => {
   const matchSkillName = useMemo(() => {
     return skillList?.find((item) => item.id === user?.user_skill[0]?.skill_id);
   }, [skillList, user]);
+  console.log("matchSkillName", matchSkillName);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -77,15 +79,7 @@ export const User: FC = memo(() => {
             </p>
           </div>
         )}
-      </div>
-      <div>
-        {matchSkillName === undefined ? (
-          <p>スキルが見つかりませんでした</p>
-        ) : (
-          <div>
-            <p>{matchSkillName?.name}</p>
-          </div>
-        )}
+        <UserSkill skill={matchSkillName} />
       </div>
     </>
   );
