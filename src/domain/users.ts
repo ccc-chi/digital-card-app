@@ -11,7 +11,7 @@ export class Users {
     public github_url: string,
     public qiita_url: string,
     public X_url: string,
-    public created_at: Date,
+    public created_at: string,
     public user_skill: User_skill[]
   ) {}
 
@@ -22,7 +22,7 @@ export class Users {
     github_id: string;
     qiita_id: string;
     X_id: string;
-    created_at: Date;
+    created_at: string;
     user_skill: User_skill[];
   }): Users {
     const github_url = `https://github.com/${users.github_id}`;
