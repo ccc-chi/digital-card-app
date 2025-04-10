@@ -1,12 +1,16 @@
-import { FC, memo } from 'react'
+import { FC, memo } from "react";
+import { Box } from "@chakra-ui/react";
+import { Users } from "../../../domain/users";
 
-import { Box } from '@chakra-ui/react'
+type Props = {
+  user: Users;
+};
 
-export const UserCard: FC = memo(() => {
-  return(
-    <Box bg={'white'} p={4} borderRadius="md" boxShadow="md">
+export const UserInfo: FC<Props> = memo((props) => {
+  const { user } = props;
+  return (
+    <Box>
       <p>カード</p>
-      <h1>ID：{id}</h1>
       <div>
         {user === null ? (
           <p>ユーザーが見つかりませんでした</p>
@@ -37,15 +41,7 @@ export const UserCard: FC = memo(() => {
             </p>
           </div>
         )}
-        {matchSkillName === undefined ? (
-          <p>スキルが見つかりませんでした</p>
-        ) : (
-          <div>
-            <p>{matchSkillName?.name}</p>
-          </div>
-        )}
       </div>
-
     </Box>
-  )
-})
+  );
+});
