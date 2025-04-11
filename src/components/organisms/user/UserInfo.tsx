@@ -1,6 +1,11 @@
 import { FC, memo } from "react";
-import { Box } from "@chakra-ui/react";
+import { Box, Flex, Stack, Text } from "@chakra-ui/react";
+import { FaGithub } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import { SiQiita } from "react-icons/si";
+
 import { Users } from "../../../domain/users";
+import { HtmlText } from "../../atoms/HtmlText";
 
 type Props = {
   user: Users;
@@ -10,38 +15,66 @@ export const UserInfo: FC<Props> = memo((props) => {
   const { user } = props;
   return (
     <Box>
-      <p>カード</p>
-      <div>
-        {user === null ? (
-          <p>ユーザーが見つかりませんでした</p>
-        ) : (
-          <div key={user.user_id}>
-            <p>{user.name}</p>
-            <p>{user.description}</p>
-            <p>
-              {user.github_id && (
-                <a href={user.github_url} target="_blank">
-                  GIT HUB：{user.github_id}
-                </a>
-              )}
-            </p>
-            <p>
-              {user.X_id && (
-                <a href={user.X_id} target="_blank">
-                  X：{user.X_id}
-                </a>
-              )}
-            </p>
-            <p>
-              {user.qiita_id && (
-                <a href={user.qiita_url} target="_blank">
-                  Qiita：{user.qiita_id}
-                </a>
-              )}
-            </p>
-          </div>
-        )}
-      </div>
+      {user === null ? (
+        <p>ユーザーが見つかりませんでした</p>
+      ) : (
+        <Stack px={4}>
+          <Text fontSize="2xl" fontWeight="bold">
+            {user.name}
+          </Text>
+          <Box borderWidth={1} borderRadius="lg" p={4} minH={200}>
+            <HtmlText>{user.description}</HtmlText>
+          </Box>
+          <Text fontSize="lg" fontWeight="bold" mt={2}>
+            SNS
+          </Text>
+          <Flex gap={2} alignItems="stretch">
+            {user.github_id && (
+              <Box as="a" href={user.github_url} target="_blank">
+                <Flex
+                  gap={2}
+                  alignItems="center"
+                  borderWidth={1}
+                  px={4}
+                  borderRadius="md"
+                  h={"45px"}
+                >
+                  <FaGithub size={20} />
+                  GitHub
+                </Flex>
+              </Box>
+            )}
+            {user.x_id && (
+              <Box as="a" href={user.x_id} target="_blank">
+                <Flex
+                  gap={2}
+                  alignItems="center"
+                  borderWidth={1}
+                  px={4}
+                  borderRadius="md"
+                  h={"45px"}
+                >
+                  <FaXTwitter size={20} />
+                </Flex>
+              </Box>
+            )}
+            {user.qiita_id && (
+              <Box as="a" href={user.qiita_url} target="_blank">
+                <Flex
+                  gap={2}
+                  alignItems="center"
+                  borderWidth={1}
+                  px={4}
+                  borderRadius="md"
+                  h={"45px"}
+                >
+                  <SiQiita size={34} />
+                </Flex>
+              </Box>
+            )}
+          </Flex>
+        </Stack>
+      )}
     </Box>
   );
 });

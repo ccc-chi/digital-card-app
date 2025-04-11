@@ -7,10 +7,10 @@ export class Users {
     public description: string,
     public github_id: string,
     public qiita_id: string,
-    public X_id: string,
+    public x_id: string,
     public github_url: string,
     public qiita_url: string,
-    public X_url: string,
+    public x_url: string,
     public created_at: string,
     public user_skill: User_skill[]
   ) {}
@@ -21,7 +21,7 @@ export class Users {
     description: string;
     github_id: string;
     qiita_id: string;
-    X_id: string;
+    x_id: string;
     created_at: string;
     user_skill: User_skill[];
   }): Users {
@@ -34,7 +34,7 @@ export class Users {
       users.description,
       users.github_id,
       users.qiita_id,
-      users.X_id,
+      users.x_id,
       github_url,
       qiita_url,
       X_url,

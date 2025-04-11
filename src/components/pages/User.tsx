@@ -6,7 +6,7 @@ import { Users } from "../../domain/users";
 import { Skills } from "../../domain/skills";
 import { UserSkill } from "../organisms/user/UserSkill";
 import { UserInfo } from "../organisms/user/UserInfo";
-import { Box } from "@chakra-ui/react";
+import { Box, Flex, Stack, Text } from "@chakra-ui/react";
 
 export const User: FC = memo(() => {
   const { id } = useParams<{ id: string }>();
@@ -46,19 +46,34 @@ export const User: FC = memo(() => {
   console.log("matchSkillName", matchSkillName);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <Flex justifyContent={"center"} alignItems={"center"} h={"100vh"}>
+        <Text fontWeight={"bold"}>Loading...</Text>
+      </Flex>
+    );
   }
   return (
-    <>
-      <h1>ID：{id}</h1>
-      {user ? (
-        <Box bg={"white"} p={4} borderRadius="md" boxShadow="md">
-          <UserInfo user={user} />
-          <UserSkill skill={matchSkillName} />
-        </Box>
-      ) : (
-        <p>ユーザーが見つかりませんでした</p>
-      )}
-    </>
+    <Box pt={8}>
+      <Box
+        bg={"white"}
+        px={4}
+        py={10}
+        borderRadius="md"
+        boxShadow="md"
+        w={"90%"}
+        minW={"300px"}
+        maxW={"600px"}
+        mx={"auto"}
+      >
+        {user ? (
+          <Stack>
+            <UserInfo user={user} />
+            <UserSkill skill={matchSkillName} />
+          </Stack>
+        ) : (
+          <p>ユーザーが見つかりませんでした</p>
+        )}
+      </Box>
+    </Box>
   );
 });
