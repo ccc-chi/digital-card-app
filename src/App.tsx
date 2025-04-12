@@ -1,8 +1,14 @@
+import { BrowserRouter } from "react-router-dom";
+import { Router } from "./router/Router";
+import { Box } from "@chakra-ui/react";
+
 function App() {
   return (
-    <>
-      <h1 data-testid="appTitle">デジタル名刺アプリ</h1>
-    </>
+    <Box bg="gray.100" minH="100vh">
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
+    </Box>
   );
 }
 
