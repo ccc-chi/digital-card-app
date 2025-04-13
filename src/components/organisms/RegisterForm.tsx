@@ -10,6 +10,7 @@ import {
   Text,
   Textarea,
 } from "@chakra-ui/react";
+import { SnsInput } from "../atoms/SnsInput";
 
 type FormValues = {
   user_id: string;
@@ -102,33 +103,33 @@ export const RegisterForm: FC = memo(() => {
           <Text fontWeight={"bold"} mt={4}>
             SNS（任意）
           </Text>
-          <Flex alignItems={"center"} gap={1}>
-            <Text mb={2} minW={"80px"} textAlign={"right"}>
-              Github：
-            </Text>
-            <Input
-              placeholder="GithubのID"
-              {...register("github_id", { required: false })}
-            />
-          </Flex>
-          <Flex alignItems={"center"} gap={1}>
-            <Text mb={2} minW={"80px"} textAlign={"right"}>
-              X：
-            </Text>
-            <Input
-              placeholder="XのID"
-              {...register("x_id", { required: false })}
-            />
-          </Flex>
-          <Flex alignItems={"center"} gap={1}>
-            <Text mb={2} minW={"80px"} textAlign={"right"}>
-              Qiita：
-            </Text>
-            <Input
-              placeholder="QiitaのID"
-              {...register("qiita_id", { required: false })}
-            />
-          </Flex>
+          <SnsInput
+            label="GitHub："
+            placeholder="GitのID"
+            register={register("github_id", {
+              required: false,
+              pattern: /^[A-Za-z]+$/i,
+            })}
+            error={errors.github_id}
+          />
+          <SnsInput
+            label="X："
+            placeholder="XのID"
+            register={register("x_id", {
+              required: false,
+              pattern: /^[A-Za-z]+$/i,
+            })}
+            error={errors.x_id}
+          />
+          <SnsInput
+            label="Qiita："
+            placeholder="QiitaのID"
+            register={register("qiita_id", {
+              required: false,
+              pattern: /^[A-Za-z]+$/i,
+            })}
+            error={errors.qiita_id}
+          />
           <Button
             mt={4}
             bg={"teal.600"}
