@@ -11,6 +11,8 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import { SnsInput } from "../atoms/SnsInput";
+import { addUser } from "../../utils/supabaseFunction";
+import { useNavigate } from "react-router-dom";
 
 enum Skills {
   react = 1,
@@ -35,8 +37,26 @@ export const RegisterForm: FC = memo(() => {
     formState: { errors },
   } = useForm<FormValues>();
 
-  const onSubmit = (data: FormValues) => {
+  const navigate = useNavigate();
+
+  const onSubmit = async (data: FormValues) => {
     console.log(data);
+    try {
+      // データを追加
+      await addUser(
+        data.user_id,
+        data.name,
+        data.description,
+        data?.github_id,
+        data?.qiita_id,
+        data?.x_id,
+        data.skill
+      );
+      navigate(`/cards/${data.user_id}`);
+    } catch (error) {
+      console.error("addUserError", error);
+      alert("登録に失敗しました");
+    }
   };
 
   return (
@@ -110,11 +130,11 @@ export const RegisterForm: FC = memo(() => {
             </Flex>
             <Select
               placeholder="選択してください"
-              {...register("skill", { required: true })}
+              {...register("skill", { required: true, valueAsNumber: true })}
             >
-              <option value="react">React</option>
-              <option value="typeScript">TypeScript</option>
-              <option value="Github">Github</option>
+              <option value={Skills.react}>React</option>
+              <option value={Skills.typeScript}>TypeScript</option>
+              <option value={Skills.Github}>Github</option>
             </Select>
             {errors?.skill?.type === "required" && (
               <Text color={"red.500"} fontSize={"ms"}>

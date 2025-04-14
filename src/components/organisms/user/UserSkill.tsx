@@ -15,7 +15,7 @@ export const UserSkill: FC<Props> = memo((props) => {
           スキル
         </Text>
         <Text
-          bg={"black"}
+          bg={"gray.500"}
           px={5}
           borderRadius="100px"
           w={"fit-content"}
