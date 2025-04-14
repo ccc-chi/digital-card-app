@@ -52,7 +52,7 @@ export const RegisterForm: FC = memo(() => {
         data?.x_id,
         data.skill
       );
-      navigate(`/cards/${data.user_id}`);
+      navigate("/");
     } catch (error) {
       console.error("addUserError", error);
       alert("登録に失敗しました");

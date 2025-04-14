@@ -1,5 +1,5 @@
 import { FC, memo } from 'react'
-import { UseFormRegisterReturn } from "react-hook-form";
+import { UseFormRegisterReturn, FieldError } from "react-hook-form";
 import {
   Flex,
   Input,
