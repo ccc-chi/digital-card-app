@@ -53,27 +53,22 @@ export const User: FC = memo(() => {
     );
   }
   return (
-    <Box pt={8}>
-      <Box
-        bg={"white"}
-        px={4}
-        py={10}
-        borderRadius="md"
-        boxShadow="md"
-        w={"90%"}
-        minW={"300px"}
-        maxW={"600px"}
-        mx={"auto"}
-      >
-        {user ? (
-          <Stack>
-            <UserInfo user={user} />
-            <UserSkill skill={matchSkillName} />
-          </Stack>
-        ) : (
-          <p>ユーザーが見つかりませんでした</p>
-        )}
-      </Box>
+    <Box
+      bg={"white"}
+      px={4}
+      py={10}
+      borderRadius="md"
+      boxShadow="md"
+      w={"100%"}
+    >
+      {user ? (
+        <Stack>
+          <UserInfo user={user} />
+          <UserSkill skill={matchSkillName} />
+        </Stack>
+      ) : (
+        <p>ユーザーが見つかりませんでした</p>
+      )}
     </Box>
   );
 });

@@ -27,7 +27,7 @@ export class Users {
   }): Users {
     const github_url = `https://github.com/${users.github_id}`;
     const qiita_url = `https://qiita.com/${users.qiita_id}`;
-    const X_url = `https://x.com/${users.X_id}`;
+    const x_url = `https://x.com/${users.x_id}`;
     return new Users(
       users.user_id,
       users.name,
@@ -37,7 +37,7 @@ export class Users {
       users.x_id,
       github_url,
       qiita_url,
-      X_url,
+      x_url,
       users.created_at,
       users.user_skill
     );

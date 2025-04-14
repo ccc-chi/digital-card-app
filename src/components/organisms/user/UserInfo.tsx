@@ -22,57 +22,67 @@ export const UserInfo: FC<Props> = memo((props) => {
           <Text fontSize="2xl" fontWeight="bold">
             {user.name}
           </Text>
-          <Box borderWidth={1} borderRadius="lg" p={4} minH={200}>
+          <Box
+            borderTopWidth={2}
+            borderBottomWidth={2}
+            py={4}
+            borderColor={"gray.200"}
+            minH={100}
+          >
             <HtmlText>{user.description}</HtmlText>
           </Box>
-          <Text fontSize="lg" fontWeight="bold" mt={2}>
-            SNS
-          </Text>
-          <Flex gap={2} alignItems="stretch">
-            {user.github_id && (
-              <Box as="a" href={user.github_url} target="_blank">
-                <Flex
-                  gap={2}
-                  alignItems="center"
-                  borderWidth={1}
-                  px={4}
-                  borderRadius="md"
-                  h={"45px"}
-                >
-                  <FaGithub size={20} />
-                  GitHub
-                </Flex>
-              </Box>
-            )}
-            {user.x_id && (
-              <Box as="a" href={user.x_id} target="_blank">
-                <Flex
-                  gap={2}
-                  alignItems="center"
-                  borderWidth={1}
-                  px={4}
-                  borderRadius="md"
-                  h={"45px"}
-                >
-                  <FaXTwitter size={20} />
-                </Flex>
-              </Box>
-            )}
-            {user.qiita_id && (
-              <Box as="a" href={user.qiita_url} target="_blank">
-                <Flex
-                  gap={2}
-                  alignItems="center"
-                  borderWidth={1}
-                  px={4}
-                  borderRadius="md"
-                  h={"45px"}
-                >
-                  <SiQiita size={34} />
-                </Flex>
-              </Box>
-            )}
-          </Flex>
+          {(user.github_id || user.x_id || user.qiita_id) && (
+            <Box mt={2}>
+              <Text fontSize="lg" fontWeight="bold" mb={2}>
+                SNS
+              </Text>
+              <Flex gap={2} alignItems="stretch">
+                {user.github_id && (
+                  <Box as="a" href={user.github_url} target="_blank">
+                    <Flex
+                      gap={2}
+                      alignItems="center"
+                      borderWidth={1}
+                      px={4}
+                      borderRadius="md"
+                      h={"45px"}
+                    >
+                      <FaGithub size={20} />
+                      GitHub
+                    </Flex>
+                  </Box>
+                )}
+                {user.x_id && (
+                  <Box as="a" href={user.x_id} target="_blank">
+                    <Flex
+                      gap={2}
+                      alignItems="center"
+                      borderWidth={1}
+                      px={4}
+                      borderRadius="md"
+                      h={"45px"}
+                    >
+                      <FaXTwitter size={20} />
+                    </Flex>
+                  </Box>
+                )}
+                {user.qiita_id && (
+                  <Box as="a" href={user.qiita_url} target="_blank">
+                    <Flex
+                      gap={2}
+                      alignItems="center"
+                      borderWidth={1}
+                      px={4}
+                      borderRadius="md"
+                      h={"45px"}
+                    >
+                      <SiQiita size={34} />
+                    </Flex>
+                  </Box>
+                )}
+              </Flex>
+            </Box>
+          )}
         </Stack>
       )}
     </Box>
