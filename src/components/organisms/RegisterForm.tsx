@@ -12,10 +12,17 @@ import {
 } from "@chakra-ui/react";
 import { SnsInput } from "../atoms/SnsInput";
 
+enum Skills {
+  react = 1,
+  typeScript = 2,
+  Github = 3,
+}
+
 type FormValues = {
   user_id: string;
   name: string;
   description: string;
+  skill: Skills;
   github_id: string;
   x_id: string;
   qiita_id: string;
@@ -46,10 +53,14 @@ export const RegisterForm: FC = memo(() => {
               })}
             />
             {errors?.user_id?.type === "required" && (
-              <p style={{ color: "red" }}>入力は必須です</p>
+              <Text color={"red.500"} fontSize={"ms"}>
+                入力は必須です
+              </Text>
             )}
             {errors?.user_id?.type === "pattern" && (
-              <p style={{ color: "red" }}>入力は英数字のみです</p>
+              <Text color={"red.500"} fontSize={"ms"}>
+                入力は英数字のみです
+              </Text>
             )}
           </Box>
 
@@ -65,7 +76,9 @@ export const RegisterForm: FC = memo(() => {
               {...register("name", { required: true })}
             />
             {errors?.name?.type === "required" && (
-              <p style={{ color: "red" }}>入力は必須です</p>
+              <Text color={"red.500"} fontSize={"ms"}>
+                入力は必須です
+              </Text>
             )}
           </Box>
 
@@ -82,7 +95,9 @@ export const RegisterForm: FC = memo(() => {
               {...register("description", { required: true })}
             />
             {errors?.description?.type === "required" && (
-              <p style={{ color: "red" }}>入力は必須です</p>
+              <Text color={"red.500"} fontSize={"ms"}>
+                入力は必須です
+              </Text>
             )}
           </Box>
 
@@ -93,11 +108,19 @@ export const RegisterForm: FC = memo(() => {
                 必須
               </Text>
             </Flex>
-            <Select placeholder="選択してください">
-              <option value="1">React</option>
-              <option value="2">TypeScript</option>
-              <option value="3">Github</option>
+            <Select
+              placeholder="選択してください"
+              {...register("skill", { required: true })}
+            >
+              <option value="react">React</option>
+              <option value="typeScript">TypeScript</option>
+              <option value="Github">Github</option>
             </Select>
+            {errors?.skill?.type === "required" && (
+              <Text color={"red.500"} fontSize={"ms"}>
+                入力は必須です
+              </Text>
+            )}
           </Box>
 
           <Text fontWeight={"bold"} mt={4}>
