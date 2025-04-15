@@ -13,6 +13,7 @@ import {
 import { SnsInput } from "../atoms/SnsInput";
 import { addUser } from "../../utils/supabaseFunction";
 import { useNavigate } from "react-router-dom";
+import { PrimaryButton } from "../atoms/button/PrimaryButton";
 
 enum Skills {
   react = 1,
@@ -173,16 +174,9 @@ export const RegisterForm: FC = memo(() => {
             })}
             error={errors.qiita_id}
           />
-          <Button
-            mt={4}
-            bg={"teal.600"}
-            color={"white"}
-            fontWeight={"bold"}
-            w={"100%"}
-            type="submit"
-          >
+          <PrimaryButton type="submit" mt={4}>
             登録
-          </Button>
+          </PrimaryButton>
         </Stack>
       </Box>
     </form>
