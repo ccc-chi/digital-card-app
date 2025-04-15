@@ -7,9 +7,17 @@ import { useNavigate } from "react-router-dom";
 export const Home: FC = memo(() => {
   const navigate = useNavigate();
   const [userId, setUserId] = useState<string>("");
+  const [error, setError] = useState<boolean>(false);
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    onClickPushPage();
+  };
+
   const onClickPushPage = () => {
-    if (userId === "") {
-      alert("IDを入力してください");
+    const checkUserId = /^[a-zA-Z0-9]+$/.test(userId);
+    if (!checkUserId) {
+      setError(true);
       return;
     }
     navigate(`/cards/${userId}`);
@@ -26,7 +34,7 @@ export const Home: FC = memo(() => {
         デジタル名刺アプリ
       </Text>
       <Box bg={"white"} p={4} borderRadius={"md"} mt={4}>
-        <form>
+        <form onSubmit={handleSubmit}>
           <Stack spacing={2} py={5}>
             <Text fontSize={"xl"} fontWeight={"bold"} textAlign={"center"}>
               IDを入力して表示
@@ -38,7 +46,12 @@ export const Home: FC = memo(() => {
               data-testid="userIdInput"
               type="text"
             />
-            <PrimaryButton onClick={onClickPushPage} type="submit">
+            {error && (
+              <Text color="red.500" fontSize="sm">
+                入力は英数字のみです
+              </Text>
+            )}
+            <PrimaryButton type="submit" disabled={userId === ""}>
               名刺を見る
             </PrimaryButton>
           </Stack>

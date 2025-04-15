@@ -6,10 +6,11 @@ type Props = {
   onClick?: () => void;
   type?: "submit";
   mt?: number;
+  disabled?: boolean;
 };
 
 export const PrimaryButton: FC<Props> = memo((props) => {
-  const { children ,type, onClick,mt} = props;
+  const { children, type, onClick, mt, disabled } = props;
   return (
     <Button
       bg={"teal.600"}
@@ -19,6 +20,7 @@ export const PrimaryButton: FC<Props> = memo((props) => {
       type={type}
       onClick={onClick}
       mt={mt}
+      disabled={disabled}
     >
       {children}
     </Button>
