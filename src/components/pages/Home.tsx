@@ -23,6 +23,10 @@ export const Home: FC = memo(() => {
     navigate(`/cards/${userId}`);
   };
 
+  const onClickPushRegister = () => {
+    navigate(`/cards/register`);
+  };
+
   return (
     <>
       <Text
@@ -56,6 +60,11 @@ export const Home: FC = memo(() => {
             </PrimaryButton>
           </Stack>
         </form>
+      </Box>
+      <Box mt={10} w={"60%"} mx={"auto"}>
+        <PrimaryButton bg={"teal.500"} onClick={onClickPushRegister}>
+          新規登録はこちら
+        </PrimaryButton>
       </Box>
     </>
   );
