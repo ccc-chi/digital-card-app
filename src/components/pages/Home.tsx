@@ -15,7 +15,7 @@ export const Home: FC = memo(() => {
   };
 
   const onClickPushPage = () => {
-    const checkUserId = /^[a-zA-Z0-9]+$/.test(userId);
+    const checkUserId = /^[a-zA-Z0-9_-]+$/.test(userId);
     if (!checkUserId) {
       setError(true);
       return;

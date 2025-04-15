@@ -53,7 +53,7 @@ export const UserInfo: FC<Props> = memo((props) => {
                   </Box>
                 )}
                 {user.x_id && (
-                  <Box as="a" href={user.x_id} target="_blank">
+                  <Box as="a" href={user.x_url} target="_blank">
                     <Flex
                       gap={2}
                       alignItems="center"
