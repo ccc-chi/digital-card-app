@@ -55,7 +55,11 @@ export const Home: FC = memo(() => {
                 入力は英数字のみです
               </Text>
             )}
-            <PrimaryButton type="submit" disabled={userId === ""}>
+            <PrimaryButton
+              type="submit"
+              disabled={userId === ""}
+              data-testid="submitButton"
+            >
               名刺を見る
             </PrimaryButton>
           </Stack>

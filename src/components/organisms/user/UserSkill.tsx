@@ -22,6 +22,7 @@ export const UserSkill: FC<Props> = memo((props) => {
           fontSize="lg"
           fontWeight="bold"
           color={"white"}
+          data-testid="userSkill"
         >
           {skill ? skill.name : "スキルの設定なし"}
         </Text>

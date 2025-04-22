@@ -78,7 +78,7 @@ export const User: FC = memo(() => {
           <p>ユーザーが見つかりませんでした</p>
         )}
       </Box>
-      <PrimaryButton mt={10} onClick={onClickBackHome}>
+      <PrimaryButton mt={10} onClick={onClickBackHome} data-testid="backButton">
         戻る
       </PrimaryButton>
     </>

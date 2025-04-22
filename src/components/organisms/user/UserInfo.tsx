@@ -19,7 +19,7 @@ export const UserInfo: FC<Props> = memo((props) => {
         <p>ユーザーが見つかりませんでした</p>
       ) : (
         <Stack px={4}>
-          <Text fontSize="2xl" fontWeight="bold">
+          <Text fontSize="2xl" fontWeight="bold" data-testid="userName">
             {user.name}
           </Text>
           <Box
@@ -28,6 +28,7 @@ export const UserInfo: FC<Props> = memo((props) => {
             py={4}
             borderColor={"gray.200"}
             minH={100}
+            data-testid="userDescription"
           >
             <HtmlText>{user.description}</HtmlText>
           </Box>
@@ -46,6 +47,7 @@ export const UserInfo: FC<Props> = memo((props) => {
                       px={4}
                       borderRadius="md"
                       h={"45px"}
+                      data-testid="github"
                     >
                       <FaGithub size={20} />
                       GitHub
@@ -61,6 +63,7 @@ export const UserInfo: FC<Props> = memo((props) => {
                       px={4}
                       borderRadius="md"
                       h={"45px"}
+                      data-testid="x"
                     >
                       <FaXTwitter size={20} />
                     </Flex>
@@ -75,6 +78,7 @@ export const UserInfo: FC<Props> = memo((props) => {
                       px={4}
                       borderRadius="md"
                       h={"45px"}
+                      data-testid="qiita"
                     >
                       <SiQiita size={34} />
                     </Flex>
