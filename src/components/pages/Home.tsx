@@ -66,7 +66,11 @@ export const Home: FC = memo(() => {
         </form>
       </Box>
       <Box mt={10} w={"60%"} mx={"auto"}>
-        <PrimaryButton bg={"teal.500"} onClick={onClickPushRegister}>
+        <PrimaryButton
+          bg={"teal.500"}
+          onClick={onClickPushRegister}
+          data-testid="registerButton"
+        >
           新規登録はこちら
         </PrimaryButton>
       </Box>

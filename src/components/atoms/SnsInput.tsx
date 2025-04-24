@@ -11,25 +11,23 @@ type Props = {
   placeholder: string;
   register: UseFormRegisterReturn;
   error?: FieldError;
+  testId?: string;
 };
 export const SnsInput: FC<Props> = memo((props) => {
-  const { label,placeholder,register,error  } = props;
-  return(
+  const { label, placeholder, register, error, testId } = props;
+  return (
     <>
-    <Flex alignItems={"center"} gap={1}>
-      <Text minW={"80px"} textAlign={"right"}>
-        {label}
-      </Text>
-      <Input
-        placeholder={placeholder}
-        {...register}
-      />
-    </Flex>
-    {error?.type === "pattern" && (
-      <Text color="red.500" fontSize="xs" textAlign={'right'} mt={-3}>
-        入力は英数字のみ
-      </Text>
-    )}
+      <Flex alignItems={"center"} gap={1}>
+        <Text minW={"80px"} textAlign={"right"}>
+          {label}
+        </Text>
+        <Input placeholder={placeholder} {...register} data-testid={testId} />
+      </Flex>
+      {error?.type === "pattern" && (
+        <Text color="red.500" fontSize="xs" textAlign={"right"} mt={-3}>
+          入力は英数字のみ
+        </Text>
+      )}
     </>
-  )
-})
+  );
+});

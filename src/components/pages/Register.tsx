@@ -9,7 +9,11 @@ export const Register: FC = memo(() => {
       <Box pb={"200px"}>
         <h1>
           <Center my={5}>
-            <Text fontSize={"3xl"} fontWeight={"bold"}>
+            <Text
+              fontSize={"3xl"}
+              fontWeight={"bold"}
+              data-testid="registerTitle"
+            >
               新規登録
             </Text>
           </Center>

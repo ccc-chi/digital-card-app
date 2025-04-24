@@ -71,8 +71,9 @@ export const RegisterForm: FC = memo(() => {
                 required: true,
                 pattern: /^[A-Za-z]+$/i,
               })}
+              data-testid="userIdInput"
             />
-            {errors?.user_id?.type === "required" && (
+            {/* {errors?.user_id?.type === "required" && (
               <Text color={"red.500"} fontSize={"ms"}>
                 入力は必須です
               </Text>
@@ -80,6 +81,15 @@ export const RegisterForm: FC = memo(() => {
             {errors?.user_id?.type === "pattern" && (
               <Text color={"red.500"} fontSize={"ms"}>
                 入力は英数字のみです
+              </Text>
+            )} */}
+            {errors?.user_id?.type && (
+              <Text color="red.500" fontSize="sm" data-testid="userIdError">
+                {errors.user_id.type === "required"
+                  ? "入力は必須です"
+                  : errors.user_id.type === "pattern"
+                  ? "入力は英数字のみです"
+                  : ""}
               </Text>
             )}
           </Box>
@@ -94,9 +104,10 @@ export const RegisterForm: FC = memo(() => {
             <Input
               placeholder="名前を入力してください"
               {...register("name", { required: true })}
+              data-testid="nameInput"
             />
             {errors?.name?.type === "required" && (
-              <Text color={"red.500"} fontSize={"ms"}>
+              <Text color={"red.500"} fontSize={"ms"} data-testid="nameError">
                 入力は必須です
               </Text>
             )}
@@ -113,9 +124,14 @@ export const RegisterForm: FC = memo(() => {
               placeholder="<h1>HTMLタグも使えます</h1>"
               minH={"100px"}
               {...register("description", { required: true })}
+              data-testid="descriptionInput"
             />
             {errors?.description?.type === "required" && (
-              <Text color={"red.500"} fontSize={"ms"}>
+              <Text
+                color={"red.500"}
+                fontSize={"ms"}
+                data-testid="descriptionError"
+              >
                 入力は必須です
               </Text>
             )}
@@ -131,13 +147,14 @@ export const RegisterForm: FC = memo(() => {
             <Select
               placeholder="選択してください"
               {...register("skill", { required: true, valueAsNumber: true })}
+              data-testid="skillSelect"
             >
               <option value={Skills.react}>React</option>
               <option value={Skills.typeScript}>TypeScript</option>
               <option value={Skills.Github}>Github</option>
             </Select>
             {errors?.skill?.type === "required" && (
-              <Text color={"red.500"} fontSize={"ms"}>
+              <Text color={"red.500"} fontSize={"ms"} data-testid="skillError">
                 入力は必須です
               </Text>
             )}
@@ -154,6 +171,7 @@ export const RegisterForm: FC = memo(() => {
               pattern: /^[A-Za-z]+$/i,
             })}
             error={errors.github_id}
+            testId="githubIdInput"
           />
           <SnsInput
             label="X："
@@ -163,6 +181,7 @@ export const RegisterForm: FC = memo(() => {
               pattern: /^[A-Za-z]+$/i,
             })}
             error={errors.x_id}
+            testId="xIdInput"
           />
           <SnsInput
             label="Qiita："
@@ -172,8 +191,13 @@ export const RegisterForm: FC = memo(() => {
               pattern: /^[A-Za-z]+$/i,
             })}
             error={errors.qiita_id}
+            testId="qiitaIdInput"
           />
-          <PrimaryButton type="submit" mt={4}>
+          <PrimaryButton
+            type="submit"
+            mt={4}
+            data-testid="registerSubmitButton"
+          >
             登録
           </PrimaryButton>
         </Stack>
