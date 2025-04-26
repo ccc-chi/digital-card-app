@@ -1,7 +1,10 @@
 import "@testing-library/jest-dom";
+import { BrowserRouter } from "react-router-dom";
 import { render, screen } from "@testing-library/react";
-import App from "../App";
+import userEvent from "@testing-library/user-event";
+
 import { Users } from "../domain/users";
+import { Router } from "../router/Router";
 
 const userData: Users[] = [
   new Users(
@@ -25,18 +28,66 @@ jest.mock("../utils/supabaseFunction", () => {
   };
 });
 
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useParams: jest.fn(() => ({ id: "abc" })),
+}));
 
+const renderPage = () => {
+  return render(
+    <BrowserRouter>
+      <Router />
+    </BrowserRouter>
+  );
+};
 
 /*
- * サンプルテスト
+ * Home
  */
-describe("サンプルテスト", () => {
-  test("[正常系]サンプルテスト", async () => {
-    // 実行
-    render(<App />);
-    const title = screen.getByTestId("appTitle");
+describe("トップページ", () => {
+  beforeEach(() => {
+    renderPage();
+  });
+  const user = userEvent.setup();
 
-    // 検証
+  test("タイトルが表示されている", async () => {
+    const title = screen.getByTestId("appTitle");
+    expect(title).toBeInTheDocument();
+  });
+
+  test("IDを入力してボタンを押すと/cards/:idに遷移する", async () => {
+    const input = await screen.findByTestId("userIdHome");
+    const button = await screen.findByTestId("homeSubmitButton");
+    await user.type(input, "abc");
+    await user.click(button);
+
+    const title = await screen.findByTestId("userName");
+    expect(title).toBeInTheDocument();
+  });
+
+  test("IDを入力しないとボタンは押せない", async () => {
+    const backButton = await screen.findByTestId("backButton");
+    await user.click(backButton);
+
+    const button = await screen.findByTestId("homeSubmitButton");
+    expect(button).toBeDisabled();
+  });
+
+  test("IDの入力が日本語のときエラーが出る", async () => {
+    const input = await screen.findByTestId("userIdHome");
+    const button = await screen.findByTestId("homeSubmitButton");
+    await user.type(input, "あいうえお");
+    await user.click(button);
+
+    const error = await screen.findByTestId("errorUserIdHome");
+    expect(error).toBeInTheDocument();
+  });
+
+  test("新規登録はこちらを押すと/cards/registerに遷移する", async () => {
+    const button = await screen.findByTestId("registerButton");
+    await user.click(button);
+
+    const title = await screen.findByTestId("registerTitle");
     expect(title).toBeInTheDocument();
   });
 });
