@@ -73,16 +73,6 @@ export const RegisterForm: FC = memo(() => {
               })}
               data-testid="userIdInput"
             />
-            {/* {errors?.user_id?.type === "required" && (
-              <Text color={"red.500"} fontSize={"ms"}>
-                入力は必須です
-              </Text>
-            )}
-            {errors?.user_id?.type === "pattern" && (
-              <Text color={"red.500"} fontSize={"ms"}>
-                入力は英数字のみです
-              </Text>
-            )} */}
             {errors?.user_id?.type && (
               <Text color="red.500" fontSize="sm" data-testid="userIdError">
                 {errors.user_id.type === "required"

@@ -47,18 +47,18 @@ export const Home: FC = memo(() => {
               value={userId}
               onChange={(e) => setUserId(e.target.value)}
               placeholder="IDを入力"
-              data-testid="userIdInput"
+              data-testid="userIdHome"
               type="text"
             />
             {error && (
-              <Text color="red.500" fontSize="sm">
+              <Text color="red.500" fontSize="sm" data-testid="errorUserIdHome">
                 入力は英数字のみです
               </Text>
             )}
             <PrimaryButton
               type="submit"
               disabled={userId === ""}
-              data-testid="submitButton"
+              data-testid="homeSubmitButton"
             >
               名刺を見る
             </PrimaryButton>

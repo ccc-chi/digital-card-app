@@ -53,13 +53,13 @@ jest.mock('react-router-dom', () => ({
   useParams: jest.fn(() => ({ id: "abc" })),
 }));
 
-const renderUserPage = () => {
+const renderPage = () => {
   return render(
     <BrowserRouter>
       <Router />
     </BrowserRouter>
   );
-}
+};
 
 /*
  * Userのテスト
@@ -67,13 +67,13 @@ const renderUserPage = () => {
 describe("名刺カードのテスト", () => {
 
   beforeEach(() => {
-    renderUserPage();
+    renderPage();
   });
   const user = userEvent.setup();
 
   test("名前が表示されている（ページ遷移ができる）", async () => {
-    const input = await screen.findByTestId('userIdInput')
-    const button = await screen.findByTestId('submitButton')
+    const input = await screen.findByTestId("userIdHome");
+    const button = await screen.findByTestId("homeSubmitButton");
     await user.type(input, "abc");
     await user.click(button);
 
