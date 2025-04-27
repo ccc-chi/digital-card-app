@@ -1,18 +1,41 @@
 import 'dotenv/config';
-import { supabase } from '../src/utils/supabase';
-import { Users } from '../src/domain/users';
+import { supabase } from "../src/utils/supabase";
 
-const fetchData = async ():Promise<Users[]> => {
-  const { data, error } = await supabase.from("users").select("*");
+const userSkillDelete = async (): Promise<void[]> => {
+  const { data, error } = await supabase
+    .from("user_skill")
+    .delete()
+    .neq("user_id", "")
+    .select("*");
   if (error) {
-    console.error("Error:", error.message);
+    console.error("userSkillError:", error.message);
   }
   if (!data) {
     return [];
   }
-  console.log(data);
+  console.log("userSkillDelete", data);
   return data;
 };
-fetchData();
 
-  
+const usersDelete = async (): Promise<void[]> => {
+  const { data, error } = await supabase
+    .from("users")
+    .delete()
+    .neq("user_id", "")
+    .select("*");
+  if (error) {
+    console.error("UsersError:", error.message);
+  }
+  if (!data) {
+    return [];
+  }
+  console.log("usersDelete", data);
+  return data;
+};
+
+const deleteAll = async () => {
+  await userSkillDelete();
+  await usersDelete();
+};
+
+deleteAll();
