@@ -3,7 +3,7 @@ name: Delete TableData Schedule
 on:
   schedule:
     - cron:  '0 21 * * *'
-    workflow_dispatch:
+  workflow_dispatch:
 
 jobs: 
   delete_table_data:
